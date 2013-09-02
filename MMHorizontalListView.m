@@ -100,13 +100,13 @@
     
     // calculate the scrollview content size and setUp the cell destination frame list
     
-    NSInteger numberOfCells = [self.dataSource MMHorizontalListViewNumberOfCells:self];
+    NSInteger numberOfCells = [self.dataSource MMHorizontalListViewNumberOfCells:self    cellIndexPath:self.cellIndexPath];
     
     CGFloat contentWidth = 0.0;
     
     for (int i=0; i < numberOfCells; i++) {
         
-        CGFloat cellWidth = [self.dataSource MMHorizontalListView:self widthForCellAtIndex:i];
+        CGFloat cellWidth = [self.dataSource MMHorizontalListView:self widthForCellAtIndex:i cellIndexPath:self.cellIndexPath];
 
         CGRect cellDestinationFrame = CGRectMake(contentWidth, 0.0, cellWidth, self.frame.size.height);
 
@@ -233,7 +233,7 @@
 
 - (void)addCellAtIndex:(NSInteger)index {
     
-    MMHorizontalListViewCell *cell = [self.dataSource MMHorizontalListView:self cellAtIndex:index];
+    MMHorizontalListViewCell *cell = [self.dataSource MMHorizontalListView:self cellAtIndex:index cellIndexPath:self.cellIndexPath];
     
     cell.index = index;
     
@@ -452,6 +452,13 @@
     }
     else if (!select && [_horizontalListDelegate respondsToSelector:@selector(MMHorizontalListView:didDeselectCellAtIndex:)]) {
         [_horizontalListDelegate MMHorizontalListView:self didDeselectCellAtIndex:cell.index];
+    }
+    
+    if (select && [_horizontalListDelegate respondsToSelector:@selector(MMHorizontalListView:didSelectCellAtIndex:cellIndexPath:)]) {
+        [_horizontalListDelegate MMHorizontalListView:self didSelectCellAtIndex:cell.index cellIndexPath:self.cellIndexPath];
+    }
+    else if (!select && [_horizontalListDelegate respondsToSelector:@selector(MMHorizontalListView:didDeselectCellAtIndex:cellIndexPath:)]) {
+        [_horizontalListDelegate MMHorizontalListView:self didDeselectCellAtIndex:cell.index cellIndexPath:self.cellIndexPath];
     }
 }
 

@@ -31,14 +31,25 @@
 
 @implementation MMHorizontalListViewCell
 
+
+@synthesize buttonBackgroundColor;
+@synthesize backgroundHighlightedColor;
+@synthesize buttonForegroundColor;
+@synthesize foregroundHighlightedColor;
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    
+
     self.selected = selected;
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    
+
     self.highlighted = highlighted;
+  	self.backgroundColor = highlighted ? self.backgroundHighlightedColor : buttonBackgroundColor;
+    [self setNeedsDisplay];
 }
+
+
 
 @end

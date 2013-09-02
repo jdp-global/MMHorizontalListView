@@ -51,7 +51,7 @@ typedef enum {
  *
  *  @return NSInteger the number of cells to display
  */
-- (NSInteger)MMHorizontalListViewNumberOfCells:(MMHorizontalListView*)horizontalListView;
+- (NSInteger)MMHorizontalListViewNumberOfCells:(MMHorizontalListView*)horizontalListView cellIndexPath:(NSIndexPath*)indexPath;
 
 /**
  *  Method to get the width of cell to display at a specific index
@@ -61,7 +61,7 @@ typedef enum {
  *
  *  @return CGFloat the width of the cell to display
  */
-- (CGFloat)MMHorizontalListView:(MMHorizontalListView*)horizontalListView widthForCellAtIndex:(NSInteger)index;
+- (CGFloat)MMHorizontalListView:(MMHorizontalListView*)horizontalListView widthForCellAtIndex:(NSInteger)index cellIndexPath:(NSIndexPath*)indexPath;
 
 /**
  *  Method to get the width MMHorizontalListViewCell view to display at a specific index
@@ -71,7 +71,7 @@ typedef enum {
  *
  *  @return MMHorizontalListViewCell the cell to display
  */
-- (MMHorizontalListViewCell*)MMHorizontalListView:(MMHorizontalListView*)horizontalListView cellAtIndex:(NSInteger)index;
+- (MMHorizontalListViewCell*)MMHorizontalListView:(MMHorizontalListView*)horizontalListView cellAtIndex:(NSInteger)index cellIndexPath:(NSIndexPath*)indexPath;
 
 @end
 
@@ -92,6 +92,7 @@ typedef enum {
  */
 - (void)MMHorizontalListView:(MMHorizontalListView*)horizontalListView didSelectCellAtIndex:(NSInteger)index;
 
+- (void)MMHorizontalListView:(MMHorizontalListView*)horizontalListView didSelectCellAtIndex:(NSInteger)index cellIndexPath:(NSIndexPath*)indexPath;
 /**
  *  Method called when a cell is deselected at a specific index
  *
@@ -99,7 +100,7 @@ typedef enum {
  *  @param index - the given index of the deselected cell
  */
 - (void)MMHorizontalListView:(MMHorizontalListView*)horizontalListView didDeselectCellAtIndex:(NSInteger)index;
-
+- (void)MMHorizontalListView:(MMHorizontalListView*)horizontalListView didDeselectCellAtIndex:(NSInteger)index  cellIndexPath:(NSIndexPath*)indexPath;
 @end
 
 /**
@@ -124,7 +125,7 @@ typedef enum {
 
 @property (nonatomic, unsafe_unretained) id<MMHorizontalListViewDelegate> delegate;     /**< The MMHorizontalListViewDelegate is conform to UIScrollView and should be implemented to handle cells selections */
 @property (nonatomic, unsafe_unretained) id<MMHorizontalListViewDataSource> dataSource; /**< The list datasource MUST be implemented to populate the list */
-
+@property (nonatomic,  strong) NSIndexPath* cellIndexPath; // if you want to use in a uitableview - pass this in
 @property (nonatomic, assign) CGFloat cellSpacing;  /**< spacing between cells, the default value is 0.0f */
 
 /**

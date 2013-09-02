@@ -29,6 +29,10 @@
 @property (nonatomic, readonly, assign) NSInteger index;
 @property (nonatomic, readonly, assign) BOOL selected;
 @property (nonatomic, readonly, assign) BOOL highlighted;
+@property (strong, nonatomic) UIColor *backgroundHighlightedColor;
+@property (strong, nonatomic) UIColor *foregroundHighlightedColor;
+@property (strong, nonatomic) UIColor *buttonBackgroundColor;
+@property (strong, nonatomic) UIColor *buttonForegroundColor;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated;
